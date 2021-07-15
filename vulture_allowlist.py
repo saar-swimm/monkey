@@ -122,7 +122,6 @@ ts  # unused variable (monkey/infection_monkey/exploit/zerologon_utils/options.p
 opnum  # unused variable (monkey/infection_monkey/exploit/zerologon.py:466)
 structure  # unused variable (monkey/infection_monkey/exploit/zerologon.py:467)
 structure  # unused variable (monkey/infection_monkey/exploit/zerologon.py:478)
-_._port  # unused attribute (monkey/infection_monkey/exploit/win_ms08_067.py:123)
 oid_set  # unused variable (monkey/infection_monkey/exploit/tools/wmi_tools.py:96)
 export_monkey_telems  # unused variable (monkey/infection_monkey/config.py:282)
 NoInternetError  # unused class (monkey/common/utils/exceptions.py:33)

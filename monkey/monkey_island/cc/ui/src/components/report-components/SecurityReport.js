@@ -30,7 +30,6 @@ import {sshKeysReport, shhIssueReport, sshIssueOverview} from './security/issues
 import {sambacryIssueOverview, sambacryIssueReport} from './security/issues/SambacryIssue';
 import {elasticIssueOverview, elasticIssueReport} from './security/issues/ElasticIssue';
 import {shellShockIssueOverview, shellShockIssueReport} from './security/issues/ShellShockIssue';
-import {ms08_067IssueOverview, ms08_067IssueReport} from './security/issues/MS08_067Issue';
 import {
   crossSegmentIssueOverview,
   crossSegmentIssueReport,
@@ -139,11 +138,6 @@ class ReportPageComponent extends AuthComponent {
       'ShellShockExploiter': {
         [this.issueContentTypes.OVERVIEW]: shellShockIssueOverview,
         [this.issueContentTypes.REPORT]: shellShockIssueReport,
-        [this.issueContentTypes.TYPE]: this.issueTypes.DANGER
-      },
-      'Ms08_067_Exploiter': {
-        [this.issueContentTypes.OVERVIEW]: ms08_067IssueOverview,
-        [this.issueContentTypes.REPORT]: ms08_067IssueReport,
         [this.issueContentTypes.TYPE]: this.issueTypes.DANGER
       },
       'ZerologonExploiter': {
