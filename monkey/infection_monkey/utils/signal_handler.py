@@ -36,7 +36,7 @@ class StopSignalHandler:
         self._master.terminate(block)
 
 
-def register_signal_handlers(master: IMaster):
+def register_signal_handlers(master: IMaster) -> StopSignalHandler:
     stop_signal_handler = StopSignalHandler(master)
 
     if is_windows_os():
@@ -48,3 +48,18 @@ def register_signal_handlers(master: IMaster):
     else:
         signal.signal(signal.SIGINT, stop_signal_handler.handle_posix_signals)
         signal.signal(signal.SIGTERM, stop_signal_handler.handle_posix_signals)
+
+    return stop_signal_handler
+
+
+def reset_signal_handlers(stop_signal_handler: StopSignalHandler):
+    """
+    Resets the signal handlers back to the default handlers provided by Python
+    """
+    if is_windows_os():
+        import win32api
+
+        win32api.SetConsoleCtrlHandler(stop_signal_handler.handle_windows_signals, False)
+    else:
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
+        signal.signal(signal.SIGTERM, signal.SIG_DFL)

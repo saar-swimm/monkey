@@ -32,7 +32,7 @@ from infection_monkey.telemetry.tunnel_telem import TunnelTelem
 from infection_monkey.utils.environment import is_windows_os
 from infection_monkey.utils.monkey_dir import get_monkey_dir_path, remove_monkey_dir
 from infection_monkey.utils.monkey_log_path import get_monkey_log_path
-from infection_monkey.utils.signal_handler import register_signal_handlers
+from infection_monkey.utils.signal_handler import register_signal_handlers, reset_signal_handlers
 from infection_monkey.windows_upgrader import WindowsUpgrader
 
 logger = logging.getLogger(__name__)
@@ -47,6 +47,7 @@ class InfectionMonkey:
         self._default_server = self._opts.server
         # TODO used in propogation phase
         self._monkey_inbound_tunnel = None
+        self._signal_handler = None
 
     @staticmethod
     def _get_arguments(args):
@@ -156,7 +157,7 @@ class InfectionMonkey:
 
         self._build_master()
 
-        register_signal_handlers(self._master)
+        self._signal_handler = register_signal_handlers(self._master)
 
     def _build_master(self):
         local_network_interfaces = InfectionMonkey._get_local_network_interfaces()
@@ -214,6 +215,8 @@ class InfectionMonkey:
 
             if self._master:
                 self._master.cleanup()
+
+            reset_signal_handlers(self._signal_handler)
 
             if self._monkey_inbound_tunnel:
                 self._monkey_inbound_tunnel.stop()
